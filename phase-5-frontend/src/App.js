@@ -3,7 +3,8 @@ import React, {Component} from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import MenuBar from './components/MenuBar'
 import Authorization from './containers/Authorization'
-
+import HomePage from './containers/HomePage'
+import Resorts from './containers/Resorts'
 
 class App extends Component {
 
@@ -26,7 +27,9 @@ class App extends Component {
         <div  >
           <MenuBar />
           <div>
-          <Route exact path='/' render={routerProps => <Authorization {...routerProps} />} />
+            <Route exact path='/home' render={routerProps => <HomePage />} />
+            <Route exact path='/' render={routerProps => <Authorization {...routerProps} />} />
+            <Route exact path='/resorts' render={routerProps => <Resorts {...routerProps} />} />
           </div>
         </div>
       </Router>

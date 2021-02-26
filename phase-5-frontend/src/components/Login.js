@@ -3,30 +3,31 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 
-function Login(props) {
+function Login (props) {
 
 
 
     return(
-        <div classname="login-container">
+        <div className="login-container">
             <Container className="block-example border border-dark" >
                 <Form>
+                    <Form.Label>Login! </Form.Label>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control  name="username" placeholder="Enter Username" />
+                        <Form.Control  name="username" placeholder="Enter Username" onChange={(e) => props.handleFormChange(e)} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control name="password" type="password" placeholder="Password" onChange={(e) => props.handleFormChange(e)} />
                     </Form.Group>
 
-                    <Button variant="primary" oonClick={(e) => this.props.handleLoginSubmit(e)}nClick>
+                    <Button variant="primary" onClick={(e) => props.handleLogin(e)}>
                     Submit
                     </Button>
                     <p></p>
                     
-                    <Button variant="success" onClick={(e) => this.props.toggleLogin(e)} > Sign Up!</Button>
+                    <Button variant="success" onClick={(e) => props.toggleLogin(e)} > Sign Up!</Button>
                 </Form>
             </Container>
         </div>
