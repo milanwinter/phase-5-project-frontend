@@ -5,6 +5,9 @@ import MenuBar from './components/MenuBar'
 import Authorization from './containers/Authorization'
 import HomePage from './containers/HomePage'
 import Resorts from './containers/Resorts'
+import ResortShow from './containers/ResortShow'
+import Favorites from './containers/Favorites'
+import ReviewPage from './containers/ReviewsPage'
 
 class App extends Component {
 
@@ -30,6 +33,9 @@ class App extends Component {
             <Route exact path='/home' render={routerProps => <HomePage />} />
             <Route exact path='/' render={routerProps => <Authorization {...routerProps} />} />
             <Route exact path='/resorts' render={routerProps => <Resorts {...routerProps} />} />
+            <Route exact path='/favorites' render={routerProps => <Favorites {...routerProps} />}/>
+            <Route exact path='/reviews' render={routerProps => <ReviewPage {...routerProps} />} />
+            <Route path='/resorts/:id' render={routerProps => <ResortShow {...routerProps} /> }/>
           </div>
         </div>
       </Router>

@@ -20,7 +20,7 @@ const MenuBar = (props) => {
                   <Nav.Link href="/home"> Home </Nav.Link>
                 {/* put  some dots or little skies in between the links? */}
                   <Nav.Link href="/resorts"> Resorts</Nav.Link>
-                  <Nav.Link href="/playlists">Favorites</Nav.Link>
+                  <Nav.Link href="/favorites">Favorites</Nav.Link>
                   <Nav.Link href="/reviews">Reviews</Nav.Link>  
                   
                 </Nav>

@@ -15,3 +15,8 @@ code {
 .login-container {
   border: black;
 }
+
+.reviews {
+  border: solid #000;
+  border-width:  1px;
+}

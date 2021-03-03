@@ -67,6 +67,7 @@ class Authorization extends Component {
         })
         .then(resp => resp.json())
         .then(json => {
+            console.log(json)
             
             if (json.user) {
                 this.props.history.push("/home")

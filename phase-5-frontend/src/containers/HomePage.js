@@ -9,7 +9,7 @@ class HomePage extends Component {
     }
 
     fetchweather = () => {
-        fetch("http://localhost:3000/specific_weather")
+        fetch("http://localhost:3000/weather")
         .then(resp => resp.json())
         .then(weatherData => {
             console.log(weatherData)
