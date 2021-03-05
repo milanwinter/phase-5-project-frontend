@@ -56,7 +56,9 @@ class Resorts extends Component {
         })
         .then(resp => resp.json())
         .then(favorite => {
-            console.log(favorite)
+            if (favorite.errors) {
+                alert("Already in your favorites")
+            }
         })
     }
 

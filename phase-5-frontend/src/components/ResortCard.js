@@ -8,7 +8,7 @@ class ResortCard extends Component {
     render() {
         return(
             <div>
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '20rem'}}>
                     <Card.Img variant="top" src={this.props.resort.logo} />
                     <Card.Body>
                         <Card.Title>{this.props.resort.name} </Card.Title>

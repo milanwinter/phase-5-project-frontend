@@ -75,6 +75,7 @@ class ResortShow extends Component {
         fetch(`http://localhost:3000/weather/${this.props.match.params.id}`)
         .then(resp => resp.json())
         .then(weather => {
+            console.log(weather)
              this.filterWeather(weather.forecast)
         })
     }
@@ -165,7 +166,7 @@ class ResortShow extends Component {
                                    {this.createCards()} 
                             </Row>
                         </Col>
-
+                        <br></br>
                         <Col>
                             <h2> Reviews  will go here</h2>
                            { this.state.reviews.map(review =>  {return <Reviews review={review} resortId={this.props.match.params.id}/>})}
