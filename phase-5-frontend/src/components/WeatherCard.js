@@ -27,21 +27,22 @@ class WeatherCard extends Component {
 
     state = {
         day: "",
-        times : {
-        first: {time: null, base:{ time: null, temp_f:null, freshsnow_in: null, windgst_mph: null, windspd_mph: null, wx_desc: null, wx_icon: null}},
-        second: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
-        third: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null, wx_desc: null, wx_icon: null}},
-        fourth: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
-        fifth: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
-        sixth: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
-        seventh: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
-        },
+        times : [
+            {time: null, base:{ time: null, temp_f:null, freshsnow_in: null, windgst_mph: null, windspd_mph: null, wx_desc: null, wx_icon: null}},
+            {time: null, base:{ time: null, temp_f:null, freshsnow_in: null, windgst_mph: null, windspd_mph: null, wx_desc: null, wx_icon: null}},
+            {time: null, base:{ time: null, temp_f:null, freshsnow_in: null, windgst_mph: null, windspd_mph: null, wx_desc: null, wx_icon: null}},
+            {time: null, base:{ time: null, temp_f:null, freshsnow_in: null, windgst_mph: null, windspd_mph: null, wx_desc: null, wx_icon: null}},
+            {time: null, base:{ time: null, temp_f:null, freshsnow_in: null, windgst_mph: null, windspd_mph: null, wx_desc: null, wx_icon: null}},
+            {time: null, base:{ time: null, temp_f:null, freshsnow_in: null, windgst_mph: null, windspd_mph: null, wx_desc: null, wx_icon: null}},
+            {time: null, base:{ time: null, temp_f:null, freshsnow_in: null, windgst_mph: null, windspd_mph: null, wx_desc: null, wx_icon: null}},
+        ],
         description: "",
         temp: "",
         freshsnow: "",
         windgust: "",
-        buttons: {one: true, two: false, three: false, four: false},
-        icon: ""
+        timeObj: {},
+        icon: "",
+        finished: false
     }
 
     componentDidMount() {
@@ -51,11 +52,8 @@ class WeatherCard extends Component {
 
 
     sortProps = () => {
-        console.log("in sort props")
-        console.log(this.props.day)
        let day = Object.keys(this.props.day).toString()
        let data = this.props.day[day]
-       console.log(data[2])
        let first = data[0]
        let second= data[1]
        let third= data[2]
@@ -66,14 +64,16 @@ class WeatherCard extends Component {
        let initialIcon = this.getImage(first.base.wx_icon)
        this.setState({
            day: day,
-           times: {
-               first: first, second: second, third: third, fourth: fourth, fifth: fifth, sixth:sixth, seventh: seventh
-           },
+           times: [
+               first,second,third,fourth,fifth,sixth,seventh
+           ],
            description: first.base.wx_desc,
            temp: first.base.temp_f,
            freshsnow: first.base.freshsnow_in,
            windgust: first.base.windgst_mph,
-           icon: initialIcon
+           icon: initialIcon,
+           timeObj: first,
+           finished: true
        })
 
     }
@@ -117,6 +117,7 @@ class WeatherCard extends Component {
             case "ModSleetSwrsDay.gif":
             case "ModSleetSwrsNight.gif":
             case "OccLightSleet.gif":
+            case "PartCloudSleetSnowThunderDay.gif":
             case "PartCloudSleetSnowThunderNight.gif":
              return sleet
              break;
@@ -165,11 +166,19 @@ class WeatherCard extends Component {
             freshsnow: choice.base.freshsnow_in,
             windgust: choice.base.windgst_mph,
             icon: image,
+            buttons: choice
             
         })
       
     }
-
+    
+    createButtons = () => {
+       
+        return (   this.state.times.map(time => {
+                return (<Button active={this.state.timeObj == time? true: false} onClick={(e)=> this.handleChange(e)} size='sm'>{time.time? time.time.slice(0,2) : null}</Button> )
+            })   
+        )
+    }
     showStats = () => {
         return (
             <div>
@@ -198,14 +207,7 @@ class WeatherCard extends Component {
                 <br></br>
                 <ButtonToolbar aria-label="Toolbar with button groups">
                     <ButtonGroup className="mr-2" aria-label="First group">
-                        
-                        <Button active={this.state.buttons.one} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.first.time? this.state.times.first.time.slice(0,2) : null}</Button> 
-                        <Button active={this.state.buttons.two} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.second.time? this.state.times.second.time.slice(0,2) : null}</Button> 
-                        <Button active={this.state.buttons.three} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.third.time? this.state.times.third.time.slice(0,2) : null}</Button> 
-                        <Button active={this.state.buttons.four} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.fourth.time? this.state.times.fourth.time.slice(0,2) : null}</Button>
-                        <Button active={this.state.buttons.four} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.fifth.time? this.state.times.fifth.time.slice(0,2): null}</Button>
-                        <Button active={this.state.buttons.four} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.sixth.time? this.state.times.sixth.time.slice(0,2): null}</Button>
-                        <Button active={this.state.buttons.four} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.seventh.time? this.state.times.seventh.time.slice(0,2): null} </Button>
+                        {this.state.finished? this.createButtons(): null}
                     </ButtonGroup>
                 </ButtonToolbar>
         </div>)

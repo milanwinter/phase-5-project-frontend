@@ -75,8 +75,6 @@ class ResortShow extends Component {
         fetch(`http://localhost:3000/weather/${this.props.match.params.id}`)
         .then(resp => resp.json())
         .then(weather => {
-            console.log(weather)
-            console.log(this.props.match.params.id)
              this.filterWeather(weather.forecast)
         })
     }
@@ -169,17 +167,25 @@ class ResortShow extends Component {
                         </Col>
                         <br></br>
                     </Row>
-
+                    <br></br>
                     <Row>
-                    <Col>
-                            <h2> Reviews  will go here</h2>
-                           { this.state.reviews.map(review =>  {return <Reviews review={review} resortId={this.props.match.params.id}/>})}
-                             <ReviewForm handleChange={this.handleChange} handleSubmit={this.handleReviewFormSubmit} />
+                        <Col>
+                             { this.state.reviews.map(review =>  {return <Reviews review={review} resortId={this.props.match.params.id}/>})}
+                        
+                        
                         </Col>
 
-
-
+                        <Col>
+                        
+                         <ReviewForm handleChange={this.handleChange} handleSubmit={this.handleReviewFormSubmit} />
+                        
+                        
+                        </Col>
                     </Row>
+                                 
+                           
+
+                
 
                 </Container>
             </div>
