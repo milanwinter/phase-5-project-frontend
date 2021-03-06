@@ -167,11 +167,17 @@ class ResortShow extends Component {
                             </Row>
                         </Col>
                         <br></br>
-                        <Col>
+                    </Row>
+
+                    <Row>
+                    <Col>
                             <h2> Reviews  will go here</h2>
                            { this.state.reviews.map(review =>  {return <Reviews review={review} resortId={this.props.match.params.id}/>})}
                              <ReviewForm handleChange={this.handleChange} handleSubmit={this.handleReviewFormSubmit} />
                         </Col>
+
+
+
                     </Row>
 
                 </Container>

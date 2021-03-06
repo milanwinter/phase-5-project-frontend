@@ -4,12 +4,15 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import ResortCard from '../components/ResortCard'
 import HomeResort from '../components/HomeResort'
+import Spinner from 'react-bootstrap/Spinner'
+
 class HomePage extends Component {
 
 
     state = {
         weatherSorted: [],
-        ratingsSorted: []
+        ratingsSorted: [],
+        complete: false
     }
     componentDidMount() {
         this.fetchweather()
@@ -26,28 +29,36 @@ class HomePage extends Component {
 
             this.setState({
                 weatherSorted: sorted.slice(0,5),
-                ratingsSorted: ratingsSorted
+                ratingsSorted: ratingsSorted,
+                complete: true
             })
         })
     }
     
 
+    handleGoButton = (id) => {
+        this.props.history.push(`/resorts/${id}`)
+    }
+
 
     displayResorts = (resorts) => {
         return (
         resorts.map(elem => {
-            return <HomeResort resort={elem.resort} snowfall={Math.round(elem.inches)} average={elem.average} />
+            return <HomeResort resort={elem.resort} snowfall={Math.round(elem.inches)} average={elem.average} handleGoButton={this.handleGoButton} />
         })
         )
     }
 
     render() {
+        
         return (
+            
             <div>
-                <Container>
+                {this.state.complete ? <Container>
                     <Row>
                          <h1> Home Page</h1>
                     </Row>
+
                     <Row>
                         <Col>
                             <h4> Resorts with highest snowfall(inches) forecast(5 days)</h4>
@@ -60,10 +71,22 @@ class HomePage extends Component {
                         </Col>
                         
                     </Row>
-                </Container>
+
+
+                </Container> : <Container > <Row>
+                    <h1> Our Workers are bringing the information down from the mountain!</h1>
+                    </Row>
+                    <iframe src="https://giphy.com/embed/EyrbMF75gOLp4XplL5" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/outsidetv-EyrbMF75gOLp4XplL5">via GIPHY</a></p>
+
+                    <Spinner animation="border" role="status">
+  <span className="sr-only">Loading...</span>
+</Spinner>
+                    </Container> }
+            
+               
             </div>
            
-        )
+        )  
     }
 }
 

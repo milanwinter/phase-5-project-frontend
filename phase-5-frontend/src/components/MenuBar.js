@@ -13,7 +13,7 @@ const MenuBar = (props) => {
     
     return (
     <div >
-            <Navbar bg="success" variant="dark">
+            <Navbar bg="primary" variant="dark">
               <Container>
                 <Navbar.Brand >Webistes Name</Navbar.Brand>
                 <Nav className="mr-auto">

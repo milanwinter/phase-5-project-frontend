@@ -7,9 +7,7 @@ class HomeResort extends Component {
 
 
 
-    checksomething = () => {
-        console.log(this.props.resort)
-    }
+   
 
     render() { 
 
@@ -25,9 +23,7 @@ class HomeResort extends Component {
                         <Card.Text>
                             Average Rating: {this.props.average}
                         </Card.Text>
-                        <Card.Text>
-                            {this.checksomething()}
-                        </Card.Text>
+                        <Button variant="primary" onClick={() => this.props.handleGoButton(this.props.resort.id)}>Check Out This Resort!</Button>
                     </Card.Body>
                 </Card>
             </div>
