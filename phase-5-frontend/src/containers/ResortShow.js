@@ -76,6 +76,7 @@ class ResortShow extends Component {
         .then(resp => resp.json())
         .then(weather => {
             console.log(weather)
+            console.log(this.props.match.params.id)
              this.filterWeather(weather.forecast)
         })
     }
@@ -94,7 +95,7 @@ class ResortShow extends Component {
 
     createCards = () => {
         if (this.state.weekWeather.length > 5) {
-             return  this.state.weekWeather.slice(0,5).map(day => {
+             return  this.state.weekWeather.map(day => {
                  return (
                      <CardGroup style={{display: 'flex', flexDirection: 'row'}} on the CardDeck and then put style={{flex: 1}}>
                             {<WeatherCard day={day} />}

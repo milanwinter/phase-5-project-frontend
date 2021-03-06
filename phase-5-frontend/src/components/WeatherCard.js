@@ -27,10 +27,15 @@ class WeatherCard extends Component {
 
     state = {
         day: "",
+        times : {
         first: {time: null, base:{ time: null, temp_f:null, freshsnow_in: null, windgst_mph: null, windspd_mph: null, wx_desc: null, wx_icon: null}},
         second: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
         third: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null, wx_desc: null, wx_icon: null}},
         fourth: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
+        fifth: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
+        sixth: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
+        seventh: {time: null, base: { temp_f:null, freshsnow_in: null, windgst_mph: null,  wx_desc: null, wx_icon: null}},
+        },
         description: "",
         temp: "",
         freshsnow: "",
@@ -51,17 +56,19 @@ class WeatherCard extends Component {
        let day = Object.keys(this.props.day).toString()
        let data = this.props.day[day]
        console.log(data[2])
-       let first = data[2]
-       let second= data[3]
-       let third= data[4]
-       let fourth= data[5]
+       let first = data[0]
+       let second= data[1]
+       let third= data[2]
+       let fourth= data[3]
+       let fifth=data[4]
+       let sixth=data[5]
+       let seventh=data[6]
        let initialIcon = this.getImage(first.base.wx_icon)
        this.setState({
            day: day,
-           first: first,
-           second: second,
-           third: third,
-           fourth: fourth,
+           times: {
+               first: first, second: second, third: third, fourth: fourth, fifth: fifth, sixth:sixth, seventh: seventh
+           },
            description: first.base.wx_desc,
            temp: first.base.temp_f,
            freshsnow: first.base.freshsnow_in,
@@ -141,55 +148,26 @@ class WeatherCard extends Component {
 
 
     handleChange = (e) => {
-        switch (e.target.innerText) {
-            case this.state.first.time:
-                let firstImage = this.getImage(this.state.first.base.wx_icon)
-                this.setState({
-                    description: this.state.first.base.wx_desc,
-                    temp: this.state.first.base.temp_f,
-                    freshsnow: this.state.first.base.freshsnow_in,
-                    windgust: this.state.first.base.windgst_mph,
-                    buttons: {one: true, two: false, three: false, four: false},
-                    icon: firstImage
-                })
-                break;
-            case this.state.second.time:
-                let secondImage = this.getImage(this.state.second.base.wx_icon)
-                this.setState({
-                    description: this.state.second.base.wx_desc,
-                    temp: this.state.second.base.temp_f,
-                    freshsnow: this.state.second.base.freshsnow_in,
-                    windgust: this.state.second.base.windgst_mph,
-                    buttons: {one: false, two: true, three: false, four: false},
-                    icon: secondImage
-                })
-                break;
-            case this.state.third.time:
-                let thirdImage = this.getImage(this.state.third.base.wx_icon)
-                this.setState({
-                    description: this.state.third.base.wx_desc,
-                    temp: this.state.third.base.temp_f,
-                    freshsnow: this.state.third.base.freshsnow_in,
-                    windgust: this.state.third.base.windgst_mph,
-                    buttons: {one: false, two: false, three: true, four: false},
-                    icon: thirdImage
-                })
-                break;
-
-            case  this.state.fourth.time:
-                let fourthImage = this.getImage(this.state.fourth.base.wx_icon)
-                this.setState({
-                    description: this.state.fourth.base.wx_desc,
-                    temp: this.state.fourth.base.temp_f,
-                    freshsnow: this.state.fourth.base.freshsnow_in,
-                    windgust: this.state.fourth.base.windgst_mph,
-                    buttons: {one: false, two: false, three: false, four: true},
-                    icon: fourthImage
-                })
-                break;
-            default:
-                break;
+        let time = e.target.innerText + ":00"
+        let choice = {}
+        for (const moment in this.state.times) {
+            if (this.state.times[moment].time == time) {
+                choice = this.state.times[moment]
+            }
+        
         }
+        console.log(choice)
+        let image = this.getImage(choice.base.wx_icon)
+
+        this.setState({
+            description: choice.base.wx_desc,
+            temp: choice.base.temp_f,
+            freshsnow: choice.base.freshsnow_in,
+            windgust: choice.base.windgst_mph,
+            icon: image,
+            
+        })
+      
     }
 
     showStats = () => {
@@ -220,10 +198,14 @@ class WeatherCard extends Component {
                 <br></br>
                 <ButtonToolbar aria-label="Toolbar with button groups">
                     <ButtonGroup className="mr-2" aria-label="First group">
-                        <Button active={this.state.buttons.one} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.first.time}</Button> 
-                        <Button active={this.state.buttons.two} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.second.time}</Button> 
-                        <Button active={this.state.buttons.three} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.third.time}</Button> 
-                        <Button active={this.state.buttons.four} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.fourth.time}</Button>
+                        
+                        <Button active={this.state.buttons.one} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.first.time? this.state.times.first.time.slice(0,2) : null}</Button> 
+                        <Button active={this.state.buttons.two} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.second.time? this.state.times.second.time.slice(0,2) : null}</Button> 
+                        <Button active={this.state.buttons.three} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.third.time? this.state.times.third.time.slice(0,2) : null}</Button> 
+                        <Button active={this.state.buttons.four} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.fourth.time? this.state.times.fourth.time.slice(0,2) : null}</Button>
+                        <Button active={this.state.buttons.four} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.fifth.time? this.state.times.fifth.time.slice(0,2): null}</Button>
+                        <Button active={this.state.buttons.four} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.sixth.time? this.state.times.sixth.time.slice(0,2): null}</Button>
+                        <Button active={this.state.buttons.four} onClick={(e)=> this.handleChange(e)} size='sm'>{this.state.times.seventh.time? this.state.times.seventh.time.slice(0,2): null} </Button>
                     </ButtonGroup>
                 </ButtonToolbar>
         </div>)
