@@ -54,19 +54,24 @@ class HomePage extends Component {
         return (
             
             <div>
-                {this.state.complete ? <Container>
-                    <Row>
-                         <h1> Home Page</h1>
+                {this.state.complete ? <Container fluid>
+                    <Row className="home-welcome">
+                         <h1 id="header"> 
+                            Welcome!
+                         </h1>
                     </Row>
 
                     <Row>
-                        <Col>
-                            <h4> Resorts with highest snowfall(inches) forecast(5 days)</h4>
+                        <Col className="high-snowfall" md={{span: 4, offset: 2}}>
+                            <Row>
+                              <h4 id="header">    Resorts with highest snowfall(inches) forecast(5 days)</h4>  
+                            </Row>
+                            
                             {this.displayResorts(this.state.weatherSorted)}
                         </Col>
 
-                        <Col>
-                            <h4>Highest Rated Resorts</h4>
+                        <Col className="high-rating" md={{span: 4, offset: 1}}>
+                            <h4 id="header" >Highest Rated Resorts</h4>
                             {this.displayResorts(this.state.ratingsSorted)}
                         </Col>
                         
@@ -74,7 +79,7 @@ class HomePage extends Component {
 
 
                 </Container> : <Container > <Row>
-                    <h1> Our Workers are bringing the information down from the mountain!</h1>
+                    <h1 id="header"> Our Workers are bringing the information down from the mountain!</h1>
                     </Row>
                     <iframe src="https://giphy.com/embed/EyrbMF75gOLp4XplL5" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/outsidetv-EyrbMF75gOLp4XplL5">via GIPHY</a></p>
 

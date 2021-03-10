@@ -42,7 +42,8 @@ class WeatherCard extends Component {
         windgust: "",
         timeObj: {},
         icon: "",
-        finished: false
+        finished: false,
+        inches: 0
     }
 
     componentDidMount() {
@@ -54,6 +55,7 @@ class WeatherCard extends Component {
     sortProps = () => {
        let day = Object.keys(this.props.day).toString()
        let data = this.props.day[day]
+       let inches = data.reduce((a,b)=> a + b.base.freshsnow_in, 0)
        let first = data[0]
        let second= data[1]
        let third= data[2]
@@ -72,8 +74,9 @@ class WeatherCard extends Component {
            freshsnow: first.base.freshsnow_in,
            windgust: first.base.windgst_mph,
            icon: initialIcon,
-           timeObj: first,
-           finished: true
+           buttons: first,
+           finished: true,
+           inches: inches
        })
 
     }
@@ -145,14 +148,42 @@ class WeatherCard extends Component {
         }
     }
 
+    getTime = (time) => {
+        if (time.time) {
+            let num = parseInt(time.time)
+            if (num < 12) {
+                let amTime = num.toString() + "am"
+                return amTime
+            } else {
+                let pmTime = (num-12).toString() + "pm"
+                return pmTime
+            }
+        } else {
+            return null
+        }
+    }
+
+    getDay = () => {
+        let timeArray = this.state.day.split("/")
+        let month = timeArray[1]
+        let day = timeArray[0]
+        if(parseInt(month) < 10) {
+            let date = month.slice(1) + "/" + day + "/" + "2020"
+            return date
+        } else {
+            let otherDate = month + "/" + day + "/" + "2020"
+            return otherDate
+        }
+    }
+
     
 
 
-    handleChange = (e) => {
-        let time = e.target.innerText + ":00"
+    handleChange = (time) => {
+        let selection = time
         let choice = {}
         for (const moment in this.state.times) {
-            if (this.state.times[moment].time == time) {
+            if (this.state.times[moment] == selection) {
                 choice = this.state.times[moment]
             }
         
@@ -175,13 +206,13 @@ class WeatherCard extends Component {
     createButtons = () => {
        
         return (   this.state.times.map(time => {
-                return (<Button active={this.state.timeObj == time? true: false} onClick={(e)=> this.handleChange(e)} size='sm'>{time.time? time.time.slice(0,2) : null}</Button> )
+                return (<Button active={this.state.buttons === time? true: false} onClick={()=> this.handleChange(time)} size='sm'>{this.getTime(time)}</Button> )
             })   
         )
     }
     showStats = () => {
         return (
-            <div>
+            <div >
                 {/* <Card.Img variant="top" width="10%" height="10%" src={smallsnow} /> */}
                 <Figure>
                     <Figure.Image
@@ -191,7 +222,8 @@ class WeatherCard extends Component {
                         src={this.state.icon}
                     />
                 </Figure>
-                <Card.Text>{this.state.day}</Card.Text>
+                <Card.Text>{this.getDay()}</Card.Text>
+                <Card.Text>Day snowfall: {Math.round(this.state.inches * 2) / 2} inches</Card.Text>
                 <Card.Text>
                     {this.state.description}
                 </Card.Text>
@@ -220,7 +252,7 @@ class WeatherCard extends Component {
         return (
 
             <div>
-                <Card style={{width:"120%", height:"100%"}}>
+                <Card className="weather-card" >
                     <Card.Body>
                         {this.showStats()}
                     </Card.Body>

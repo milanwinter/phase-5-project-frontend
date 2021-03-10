@@ -9,6 +9,7 @@ import ResortShow from './containers/ResortShow'
 import Favorites from './containers/Favorites'
 import ReviewPage from './containers/ReviewsPage'
 import Profile from './components/Profile'
+import Footer from './components/Footer'
 
 class App extends Component {
 
@@ -16,11 +17,7 @@ class App extends Component {
   componentDidMount() {
   }
 
-  handleUserInfo = (info) => {
-    this.setState({
-      userId: info
-    })
-  }
+
   
 
 
@@ -28,7 +25,7 @@ class App extends Component {
     return (
       
       <Router>
-        <div  >
+        <div className="app" >
           <MenuBar />
           <div>
             <Route exact path='/home' render={routerProps => <HomePage {...routerProps} />} />
@@ -39,6 +36,7 @@ class App extends Component {
             <Route exact path='/profile' render={routerProps => <Profile {...routerProps} />} />
             <Route path='/resorts/:id' render={routerProps => <ResortShow {...routerProps} /> }/>
           </div>
+          {/* <Footer /> */}
         </div>
       </Router>
     );

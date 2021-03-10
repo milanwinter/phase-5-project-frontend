@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Amaranth&family=Fascinate&family=Fredoka+One&display=swap');
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -12,8 +15,20 @@ code {
     monospace;
 }
 
-.login-container {
-  border: black;
+.login {
+  border: solid #000;
+  border-width:  1px;
+  background-color: #2c90e8;
+  opacity: 85%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+
+
 }
 
 .reviews {
@@ -36,10 +51,99 @@ height: 100%;
 background-size: cover;
 } */
 
-html,body { 
-  background: url(background2.jpg) no-repeat center center fixed; 
+html,body{ 
+  background: url(testing-size.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+
+.weather-card {
+  opacity: 85%;
+  font-family: "Amaranth";
+  background-color: #2c90e8 !important;
+}
+
+.resort-reviews {
+  background-color: #2c90e8;
+  opacity: 85%;
+  justify-content: center;
+}
+.reviews {
+  border: 2px solid #ccc;
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.resort-card {
+  background-color:#2c90e8 !important;
+  opacity: 85%;
+}
+
+.resort-logo {
+  height: 200px;
+  width: 200px;
+}
+
+.errorMsg {
+  color: #cc0000;
+  margin-bottom: 12px;
+}
+
+.high-snowfall {
+  border-radius: 25px;
+  flex-direction: row;
+  background-color: #2c90e8;
+  opacity: 80%;
+}
+
+.high-rating {
+  border-radius: 25px;
+  background-color: #2c90e8;
+  opacity: 80%;
+}
+
+.home-welcome {
+  justify-content: center;
+}
+h1#header {
+  font-family: "Fascinate", cursive;
+}
+h2#header {
+  font-family: "Fascinate", cursive;
+}
+h3#header {
+  font-family: "Fascinate",cursive;
+}
+h4#header {
+  font-family: "Fascinate", cursive;
+}
+
+.menu {
+  font-family: "Fredoka One";
+}
+
+.footer {
+  position:absolute;
+left:0;
+bottom:0;
+right:0;
+text-align: center;
+}
+
+.app {
+  padding-bottom:60px;
+}
+
+.resort-show-header {
+  justify-content: center;
+}
+
+.map-image {
+  width: 300px;
+  height: 300px;
 }

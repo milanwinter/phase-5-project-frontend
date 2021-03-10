@@ -71,7 +71,7 @@ class Favorites extends Component {
             <div>
                 <Container>
                     <Row>
-                        <h1 >Favorites!</h1>
+                        <h1 id="header" >Favorites!</h1>
                     </Row>
                     <Row>
 

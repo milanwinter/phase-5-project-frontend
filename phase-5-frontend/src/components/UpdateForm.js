@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 
 
 
-function UpdateForm({profile,handleFormChange,handleSubmit}) {
+function UpdateForm({profile,handleFormChange,handleSubmit,hideForm}) {
     return (
         <div>
            <Form style={{background: 'lightgrey'}}>
@@ -39,7 +39,8 @@ function UpdateForm({profile,handleFormChange,handleSubmit}) {
                 </Form.Group>
                 <Button variant="primary" onClick={(e) => handleSubmit(e)}>
                     Submit
-                    </Button>
+                  </Button>
+                  <Button variant="danger" onClick={() => hideForm()}> Cancel</Button>
             </Form>
      </div>
     )

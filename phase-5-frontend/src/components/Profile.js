@@ -84,6 +84,11 @@ class Profile extends Component {
         })
     }
 
+    hideForm = () => {
+        this.setState({
+            form: false
+        })
+    }
 
     render() {
         return (
@@ -105,7 +110,7 @@ class Profile extends Component {
 
                         <Col>
                         <br></br>
-                        {this.state.form? <UpdateForm profile={this.state.profile} handleFormChange={this.handleFormChange} handleSubmit={this.handleSubmit} /> : null}
+                        {this.state.form? <UpdateForm profile={this.state.profile} handleFormChange={this.handleFormChange} handleSubmit={this.handleSubmit} hideForm={this.hideForm} /> : null}
                         
                         </Col>
                         

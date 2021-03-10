@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-
+import StarRatings from 'react-star-ratings'
 
 class HomeResort extends Component {
 
@@ -21,11 +21,18 @@ class HomeResort extends Component {
                         Snowfall Next 5 days: {this.props.snowfall} inches
                         </Card.Text>
                         <Card.Text>
-                            Average Rating: {this.props.average}
+                          {isNaN(this.props.average) ? this.props.average :  <StarRatings
+                            rating={this.props.average}
+                            starDimension="15px"
+                            starSpacing="5px"
+                            starRatedColor="red"
+                        />}  
                         </Card.Text>
+                        
                         <Button variant="primary" onClick={() => this.props.handleGoButton(this.props.resort.id)}>Check Out This Resort!</Button>
                     </Card.Body>
                 </Card>
+                <br></br>
             </div>
         )
     }

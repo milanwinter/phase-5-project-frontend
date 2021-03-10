@@ -4,6 +4,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Reviews from '../components/Reviews'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 class ReviewsPage extends Component {
 
@@ -47,7 +49,23 @@ class ReviewsPage extends Component {
         })
     }
 
-
+    sortReviews = (e) => {
+        switch (e.target.name) {
+            case "highest":
+                let highestRated = this.state.reviews.sort((a,b) => a.rating > b.rating ? -1 : 1)
+                this.setState({
+                    ratings: highestRated
+                })
+                break;
+            case "lowest":
+                let lowestRated = this.state.reviews.sort((a,b) => a.rating > b.rating? 1 : -1)
+                this.setState({
+                    ratings: lowestRated
+                })
+            default:
+                break;
+        }
+    }
 
 
 
@@ -57,17 +75,21 @@ class ReviewsPage extends Component {
             <div>
                 <Container>
                     <Row>
-                        <h1>Reviews</h1>
+                        <h1 id="header">Reviews</h1>
                     </Row>
                     <Row>
                         <Col>
-                            <h2> Your Reviews</h2>
-                            {this.state.userReviews.map(review => <Reviews deleteReview={this.deleteReview} review={review} />)}
+                            <h2 id="header" > Your Reviews</h2>
+                            {this.state.userReviews.map(review => <Reviews fromReviewPage={true} deleteReview={this.deleteReview} review={review} />)}
+                            
                         </Col>
                         <Col>
-                            <h2> All Reviews </h2>
-                            <Button>Sort Button Goes Here</Button>
-                               {this.state.reviews.map(review => <Reviews deleteReview={this.deleteReview} review={review} />)} 
+                            <h2 id="header"> All Reviews </h2>
+                            <DropdownButton id="dropdown-basic-button" title="Sort By" >
+                                <Dropdown.Item onClick={(e) => this.sortReviews(e)} name="highest">Highest Rated</Dropdown.Item>
+                                <Dropdown.Item onClick={(e) => this.sortReviews(e)} name="lowest">Lowest Rated</Dropdown.Item>
+                            </DropdownButton>
+                               {this.state.reviews.map(review => <Reviews fromReviewPage={true} deleteReview={this.deleteReview} review={review} />)} 
                         </Col>
                     </Row>
                 </Container>

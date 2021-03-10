@@ -13,9 +13,9 @@ const MenuBar = (props) => {
     
     return (
     <div >
-            <Navbar bg="primary" variant="dark">
-              <Container>
-                <Navbar.Brand >Webistes Name</Navbar.Brand>
+            <Navbar bg="primary" variant="dark" className="menu">
+              <Container >
+                <Navbar.Brand >SnowSeeker</Navbar.Brand>
                 <Nav className="mr-auto">
                   <Nav.Link href="/home"> Home </Nav.Link>
                 {/* put  some dots or little skies in between the links? */}

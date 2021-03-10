@@ -15,6 +15,7 @@ class Resorts extends Component {
 
     componentDidMount() {
         this.fetchResorts()
+
     }
 
     fetchResorts = () => {
@@ -33,11 +34,14 @@ class Resorts extends Component {
         })
     }
 
+    
+
     // Card buttons //
 
     handleGoButton = (id) => {
         this.props.history.push(`/resorts/${id}`)
     }
+
 
     addToFavorites = (id) => {
         let userId = localStorage.getItem("user")
@@ -62,6 +66,19 @@ class Resorts extends Component {
         })
     }
 
+    removeFavorite = (id, favoriteId) => {
+        let resortId = id
+        fetch(`http://localhost:3000/favorites/${favoriteId}`, {
+            method: "DELETE"
+        })
+        .then(resp => resp.json())
+        .then(json => {
+          console.log("hi")
+        })
+    }
+
+    //end of card buttons //
+
 
     render() {
         return (
@@ -69,16 +86,16 @@ class Resorts extends Component {
                 <Container>
                     <Row>
                         <Col>
-                            <h1>California/Nevada</h1>
-                            {this.state.calNevResorts.map(resort => <ResortCard resort={resort} addToFavorites={this.addToFavorites} handleGoButton={this.handleGoButton}/>)}
+                            <h1 id="header" >California/Nevada</h1>
+                            {this.state.calNevResorts.map(resort => <ResortCard resort={resort} addToFavorites={this.addToFavorites} removeFavorite={this.removeFavorite} handleGoButton={this.handleGoButton}/>)}
                         </Col>
                         <Col>
-                            <h1> Colorado </h1>
-                            {this.state.colResorts.map(resort => <ResortCard resort={resort} addToFavorites={this.addToFavorites}  handleGoButton={this.handleGoButton}/>)}
+                            <h1 id="header"> Colorado </h1>
+                            {this.state.colResorts.map(resort => <ResortCard resort={resort} addToFavorites={this.addToFavorites} removeFavorite={this.removeFavorite}  handleGoButton={this.handleGoButton}/>)}
                         </Col>
                         <Col>
-                            <h1>Utah/Wyoming</h1>
-                            {this.state.utahResorts.map(resort => <ResortCard resort={resort} addToFavorites={this.addToFavorites} handleGoButton={this.handleGoButton} />)}
+                            <h1 id="header" >Utah/Wyoming</h1>
+                            {this.state.utahResorts.map(resort => <ResortCard resort={resort} addToFavorites={this.addToFavorites} removeFavorite={this.removeFavorite} handleGoButton={this.handleGoButton} />)}
                         </Col>
                     </Row>
                 </Container>

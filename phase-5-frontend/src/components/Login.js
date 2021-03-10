@@ -2,6 +2,7 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
 function Login (props) {
 
@@ -9,9 +10,10 @@ function Login (props) {
 
     return(
         <div className="login-container">
-            <Container className="block-example border border-dark" >
-                <Form>
-                    <Form.Label>Login! </Form.Label>
+            <Container className="login" >
+                <Row>
+                     <Form>
+                    <h2 id="header" >Login</h2>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
                         <Form.Control  name="username" placeholder="Enter Username" onChange={(e) => props.handleFormChange(e)} />
@@ -28,7 +30,9 @@ function Login (props) {
                     <p></p>
                     
                     <Button variant="success" onClick={(e) => props.toggleLogin(e)} > Sign Up!</Button>
-                </Form>
+                    </Form> 
+                </Row>
+                  
             </Container>
         </div>
     )

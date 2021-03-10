@@ -2,15 +2,17 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
 function Signup(props) {
 
 
     return (
-        <div className="login-container">
-            <Container className="block-example border border-dark" >
+        <div >
+            <Container className="login" >
+
                 <Form>
-                    <Form.Label>Sign Up!</Form.Label>
+                    <h1 id="header" >Sign Up!</h1>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
                         <Form.Control  name="username" placeholder="Enter Username" onChange={(e) => props.handleFormChange(e)} />
@@ -36,7 +38,7 @@ function Signup(props) {
                     </Button>
                     <p></p>
                     
-                    <Button variant="success" onClick={(e) => props.toggleLogin(e)} > Sign Up!</Button>
+                    <Button variant="success" onClick={(e) => props.toggleLogin(e)} > Already have an account</Button>
                 </Form>
             </Container>
         </div>
